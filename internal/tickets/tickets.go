@@ -95,14 +95,13 @@ func (dc *DestinationCounter) GetTotalTickets(ticket Ticket) error {
 	return nil
 }
 
-// ejemplo 2
+// GetCountByPeriod implementa TicketProcessor para contar tickets p/ determinados periodos.
 func (dc *DestinationCounter) GetCountByPeriod(ticket Ticket) error {
 	tempo, err := time.Parse("15:04", ticket.Time)
 	if err != nil {
 		return err
 	}
 
-	// Obter as horas em minutos
 	tempoMinutos := tempo.Hour()*60 + tempo.Minute()
 
 	switch dc.Period {
@@ -126,6 +125,7 @@ func (dc *DestinationCounter) GetCountByPeriod(ticket Ticket) error {
 	return nil
 }
 
+// AverageDestination retorna o percentual de viagens realizadas para o destino
 func AverageDestination(CountDestination, total int) float64 {
 	return (float64(CountDestination) / float64(total)) * 100
 }
